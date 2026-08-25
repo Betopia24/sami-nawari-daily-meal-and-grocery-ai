@@ -1,0 +1,44 @@
+services:
+  postgres-test:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: food_ai_test
+      POSTGRES_USER: food_ai
+      POSTGRES_PASSWORD: food_ai
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U food_ai -d food_ai_test"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  redis-test:
+    image: redis:7.4-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  mock-main-backend:
+    build: .
+    environment:
+      APP_ENV: test
+      INTERNAL_SERVICE_TOKEN: test-service-token-123
+      LLM_PROVIDER: fake
+    command: ["uvicorn", "tests.support.mock_main_backend:app", "--host", "0.0.0.0", "--port", "8001"]
+
+  test-runner:
+    build: .
+    environment:
+      APP_ENV: test
+      RUN_INTEGRATION: "1"
+      DATABASE_URL: postgresql+asyncpg://food_ai:food_ai@postgres-test:5432/food_ai_test
+      REDIS_URL: redis://redis-test:6379/0
+      MAIN_BACKEND_BASE_URL: http://mock-main-backend:8001
+      INTERNAL_SERVICE_TOKEN: test-service-token-123
+      LLM_PROVIDER: fake
+    depends_on:
+      postgres-test: {condition: service_healthy}
+      redis-test: {condition: service_healthy}
+      mock-main-backend: {condition: service_started}
+    command: ["sh", "-c", "alembic upgrade head && pytest -q -m 'not live' --cov=app --cov-report=term-missing"]

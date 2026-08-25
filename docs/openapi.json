@@ -1,0 +1,2247 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Food AI Service",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/internal/v1/recommendations/foods": {
+      "post": {
+        "tags": [
+          "recommendations"
+        ],
+        "summary": "Recommend Foods",
+        "operationId": "recommend_foods_internal_v1_recommendations_foods_post",
+        "parameters": [
+          {
+            "name": "X-User-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-User-Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FoodRecommendationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_RecommendationResult_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/v1/recommendations/recipes": {
+      "post": {
+        "tags": [
+          "recommendations"
+        ],
+        "summary": "Recommend Recipes",
+        "operationId": "recommend_recipes_internal_v1_recommendations_recipes_post",
+        "parameters": [
+          {
+            "name": "X-User-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-User-Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecipeRecommendationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_RecommendationResult_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/v1/meal-plans/generate": {
+      "post": {
+        "tags": [
+          "meal-plans"
+        ],
+        "summary": "Generate Meal Plan",
+        "operationId": "generate_meal_plan_internal_v1_meal_plans_generate_post",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "X-User-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-User-Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MealPlanGenerateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_MealPlanGenerateResult_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/v1/meal-plans/{plan_id}/items/{item_id}/replacement-options": {
+      "post": {
+        "tags": [
+          "meal-plans"
+        ],
+        "summary": "Replacement Options",
+        "operationId": "replacement_options_internal_v1_meal_plans__plan_id__items__item_id__replacement_options_post",
+        "parameters": [
+          {
+            "name": "plan_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Plan Id"
+            }
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Item Id"
+            }
+          },
+          {
+            "name": "X-User-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-User-Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReplacementOptionsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_ReplacementOptionsResult_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/v1/meal-plans/{plan_id}/insights": {
+      "post": {
+        "tags": [
+          "meal-plans"
+        ],
+        "summary": "Nutrition Insight",
+        "operationId": "nutrition_insight_internal_v1_meal_plans__plan_id__insights_post",
+        "parameters": [
+          {
+            "name": "plan_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Plan Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "X-User-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-User-Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_NutritionInsightResult_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/v1/meal-plans/{plan_id}/insights/latest": {
+      "get": {
+        "tags": [
+          "meal-plans"
+        ],
+        "summary": "Latest Nutrition Insight",
+        "operationId": "latest_nutrition_insight_internal_v1_meal_plans__plan_id__insights_latest_get",
+        "parameters": [
+          {
+            "name": "plan_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Plan Id"
+            }
+          },
+          {
+            "name": "X-User-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-User-Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_NutritionInsightResult_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/v1/grocery-drafts/from-meal-plan": {
+      "post": {
+        "tags": [
+          "grocery"
+        ],
+        "summary": "From Meal Plan",
+        "operationId": "from_meal_plan_internal_v1_grocery_drafts_from_meal_plan_post",
+        "parameters": [
+          {
+            "name": "X-User-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-User-Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroceryFromMealPlanRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_GroceryDraftResult_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/v1/grocery-drafts/from-recipe": {
+      "post": {
+        "tags": [
+          "grocery"
+        ],
+        "summary": "From Recipe",
+        "operationId": "from_recipe_internal_v1_grocery_drafts_from_recipe_post",
+        "parameters": [
+          {
+            "name": "X-User-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-User-Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroceryFromRecipeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_GroceryDraftResult_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/v1/seller-foods/{food_id}/recipe-drafts/generate": {
+      "post": {
+        "tags": [
+          "seller-recipe-ai"
+        ],
+        "summary": "Generate",
+        "operationId": "generate_internal_v1_seller_foods__food_id__recipe_drafts_generate_post",
+        "parameters": [
+          {
+            "name": "food_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Food Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "X-User-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-User-Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateSellerRecipeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_SellerRecipeGenerationResult_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/v1/seller-foods/{food_id}/recipe-drafts/regenerate": {
+      "post": {
+        "tags": [
+          "seller-recipe-ai"
+        ],
+        "summary": "Regenerate",
+        "operationId": "regenerate_internal_v1_seller_foods__food_id__recipe_drafts_regenerate_post",
+        "parameters": [
+          {
+            "name": "food_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Food Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Idempotency-Key"
+            }
+          },
+          {
+            "name": "X-User-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-User-Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegenerateSellerRecipeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_SellerRecipeGenerationResult_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/v1/compatibility/check": {
+      "post": {
+        "tags": [
+          "compatibility"
+        ],
+        "summary": "Check",
+        "operationId": "check_internal_v1_compatibility_check_post",
+        "parameters": [
+          {
+            "name": "X-User-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-User-Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompatibilityCheckRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_CompatibilityResult_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/v1/compatibility/check-batch": {
+      "post": {
+        "tags": [
+          "compatibility"
+        ],
+        "summary": "Check Batch",
+        "operationId": "check_batch_internal_v1_compatibility_check_batch_post",
+        "parameters": [
+          {
+            "name": "X-User-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-User-Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompatibilityBatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_CompatibilityBatchResult_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/v1/recommendation-events": {
+      "post": {
+        "tags": [
+          "recommendation-events"
+        ],
+        "summary": "Record",
+        "operationId": "record_internal_v1_recommendation_events_post",
+        "parameters": [
+          {
+            "name": "X-User-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "X-User-Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecommendationEventRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/v1/users/{user_id}/profile-cache/invalidate": {
+      "post": {
+        "tags": [
+          "profile-cache"
+        ],
+        "summary": "Invalidate",
+        "operationId": "invalidate_internal_v1_users__user_id__profile_cache_invalidate_post",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "User Id"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileInvalidateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIResponse_dict_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health/live": {
+      "get": {
+        "summary": "Live",
+        "operationId": "live_health_live_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health/ready": {
+      "get": {
+        "summary": "Ready",
+        "operationId": "ready_health_ready_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "APIResponse_CompatibilityBatchResult_": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "title": "Request Id"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CompatibilityBatchResult"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "request_id",
+          "data"
+        ],
+        "title": "APIResponse[CompatibilityBatchResult]"
+      },
+      "APIResponse_CompatibilityResult_": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "title": "Request Id"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CompatibilityResult"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "request_id",
+          "data"
+        ],
+        "title": "APIResponse[CompatibilityResult]"
+      },
+      "APIResponse_GroceryDraftResult_": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "title": "Request Id"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GroceryDraftResult"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "request_id",
+          "data"
+        ],
+        "title": "APIResponse[GroceryDraftResult]"
+      },
+      "APIResponse_MealPlanGenerateResult_": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "title": "Request Id"
+          },
+          "data": {
+            "$ref": "#/components/schemas/MealPlanGenerateResult"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "request_id",
+          "data"
+        ],
+        "title": "APIResponse[MealPlanGenerateResult]"
+      },
+      "APIResponse_NutritionInsightResult_": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "title": "Request Id"
+          },
+          "data": {
+            "$ref": "#/components/schemas/NutritionInsightResult"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "request_id",
+          "data"
+        ],
+        "title": "APIResponse[NutritionInsightResult]"
+      },
+      "APIResponse_RecommendationResult_": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "title": "Request Id"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RecommendationResult"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "request_id",
+          "data"
+        ],
+        "title": "APIResponse[RecommendationResult]"
+      },
+      "APIResponse_ReplacementOptionsResult_": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "title": "Request Id"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ReplacementOptionsResult"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "request_id",
+          "data"
+        ],
+        "title": "APIResponse[ReplacementOptionsResult]"
+      },
+      "APIResponse_SellerRecipeGenerationResult_": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "title": "Request Id"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SellerRecipeGenerationResult"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "request_id",
+          "data"
+        ],
+        "title": "APIResponse[SellerRecipeGenerationResult]"
+      },
+      "APIResponse_dict_": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "title": "Request Id"
+          },
+          "data": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Data"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "request_id",
+          "data"
+        ],
+        "title": "APIResponse[dict]"
+      },
+      "CompatibilityBatchRequest": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CompatibilityResource"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "CompatibilityBatchRequest"
+      },
+      "CompatibilityBatchResult": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CompatibilityResult"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "CompatibilityBatchResult"
+      },
+      "CompatibilityCheckRequest": {
+        "properties": {
+          "resource_type": {
+            "$ref": "#/components/schemas/ResourceType"
+          },
+          "resource_id": {
+            "type": "string",
+            "title": "Resource Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "resource_type",
+          "resource_id"
+        ],
+        "title": "CompatibilityCheckRequest"
+      },
+      "CompatibilityConflict": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "allergen": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Allergen"
+          },
+          "ingredient": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ingredient"
+          },
+          "dietary_preference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dietary Preference"
+          },
+          "severity": {
+            "type": "string",
+            "title": "Severity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "severity"
+        ],
+        "title": "CompatibilityConflict"
+      },
+      "CompatibilityResource": {
+        "properties": {
+          "resource_type": {
+            "$ref": "#/components/schemas/ResourceType"
+          },
+          "resource_id": {
+            "type": "string",
+            "title": "Resource Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "resource_type",
+          "resource_id"
+        ],
+        "title": "CompatibilityResource"
+      },
+      "CompatibilityResult": {
+        "properties": {
+          "resource_type": {
+            "$ref": "#/components/schemas/ResourceType"
+          },
+          "resource_id": {
+            "type": "string",
+            "title": "Resource Id"
+          },
+          "status": {
+            "$ref": "#/components/schemas/CompatibilityStatus"
+          },
+          "conflicts": {
+            "items": {
+              "$ref": "#/components/schemas/CompatibilityConflict"
+            },
+            "type": "array",
+            "title": "Conflicts"
+          },
+          "unknown_ingredients": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Unknown Ingredients"
+          }
+        },
+        "type": "object",
+        "required": [
+          "resource_type",
+          "resource_id",
+          "status"
+        ],
+        "title": "CompatibilityResult"
+      },
+      "CompatibilityStatus": {
+        "type": "string",
+        "enum": [
+          "safe",
+          "conflict",
+          "potential_conflict",
+          "unknown"
+        ],
+        "title": "CompatibilityStatus"
+      },
+      "FoodRecommendationRequest": {
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "maximum": 50.0,
+            "minimum": 1.0,
+            "title": "Limit",
+            "default": 20
+          },
+          "meal_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meal Type"
+          },
+          "delivery_zone_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Delivery Zone Id"
+          },
+          "exclude_food_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true,
+            "title": "Exclude Food Ids"
+          }
+        },
+        "type": "object",
+        "title": "FoodRecommendationRequest"
+      },
+      "GenerateSellerRecipeRequest": {
+        "properties": {
+          "language": {
+            "type": "string",
+            "maxLength": 8,
+            "minLength": 2,
+            "title": "Language",
+            "default": "en"
+          }
+        },
+        "type": "object",
+        "title": "GenerateSellerRecipeRequest"
+      },
+      "GeneratedRecipeDraft": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "summary": {
+            "type": "string",
+            "title": "Summary"
+          },
+          "servings": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Servings"
+          },
+          "prep_time_minutes": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Prep Time Minutes"
+          },
+          "cook_time_minutes": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Cook Time Minutes"
+          },
+          "ingredients": {
+            "items": {
+              "$ref": "#/components/schemas/GeneratedRecipeIngredient"
+            },
+            "type": "array",
+            "title": "Ingredients"
+          },
+          "steps": {
+            "items": {
+              "$ref": "#/components/schemas/GeneratedRecipeStep"
+            },
+            "type": "array",
+            "title": "Steps"
+          },
+          "suggested_missing_ingredients": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Suggested Missing Ingredients"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "summary",
+          "servings",
+          "prep_time_minutes",
+          "cook_time_minutes",
+          "ingredients",
+          "steps"
+        ],
+        "title": "GeneratedRecipeDraft"
+      },
+      "GeneratedRecipeIngredient": {
+        "properties": {
+          "ingredient_id": {
+            "type": "string",
+            "title": "Ingredient Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "quantity": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Quantity"
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ingredient_id",
+          "name",
+          "quantity",
+          "unit"
+        ],
+        "title": "GeneratedRecipeIngredient"
+      },
+      "GeneratedRecipeStep": {
+        "properties": {
+          "step_number": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Step Number"
+          },
+          "instruction": {
+            "type": "string",
+            "minLength": 3,
+            "title": "Instruction"
+          }
+        },
+        "type": "object",
+        "required": [
+          "step_number",
+          "instruction"
+        ],
+        "title": "GeneratedRecipeStep"
+      },
+      "GroceryDraftResult": {
+        "properties": {
+          "source_type": {
+            "type": "string",
+            "title": "Source Type"
+          },
+          "source_id": {
+            "type": "string",
+            "title": "Source Id"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/GroceryItem"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_type",
+          "source_id",
+          "items"
+        ],
+        "title": "GroceryDraftResult"
+      },
+      "GroceryFromMealPlanRequest": {
+        "properties": {
+          "meal_plan_id": {
+            "type": "string",
+            "title": "Meal Plan Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "meal_plan_id"
+        ],
+        "title": "GroceryFromMealPlanRequest"
+      },
+      "GroceryFromRecipeRequest": {
+        "properties": {
+          "recipe_id": {
+            "type": "string",
+            "title": "Recipe Id"
+          },
+          "servings": {
+            "type": "integer",
+            "maximum": 50.0,
+            "minimum": 1.0,
+            "title": "Servings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "recipe_id",
+          "servings"
+        ],
+        "title": "GroceryFromRecipeRequest"
+      },
+      "GroceryItem": {
+        "properties": {
+          "ingredient_id": {
+            "type": "string",
+            "title": "Ingredient Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "quantity": {
+            "type": "number",
+            "title": "Quantity"
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ingredient_id",
+          "name",
+          "quantity",
+          "unit",
+          "category"
+        ],
+        "title": "GroceryItem"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "MealPlanDay": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "title": "Date"
+          },
+          "meals": {
+            "items": {
+              "$ref": "#/components/schemas/MealPlanItem"
+            },
+            "type": "array",
+            "title": "Meals"
+          }
+        },
+        "type": "object",
+        "required": [
+          "date",
+          "meals"
+        ],
+        "title": "MealPlanDay"
+      },
+      "MealPlanDraft": {
+        "properties": {
+          "days": {
+            "items": {
+              "$ref": "#/components/schemas/MealPlanDay"
+            },
+            "type": "array",
+            "title": "Days"
+          }
+        },
+        "type": "object",
+        "required": [
+          "days"
+        ],
+        "title": "MealPlanDraft"
+      },
+      "MealPlanGenerateRequest": {
+        "properties": {
+          "start_date": {
+            "type": "string",
+            "title": "Start Date"
+          },
+          "days": {
+            "type": "integer",
+            "maximum": 14.0,
+            "minimum": 1.0,
+            "title": "Days",
+            "default": 7
+          },
+          "meals_per_day": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Meals Per Day"
+          },
+          "goal_override": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Goal Override"
+          },
+          "excluded_recipe_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true,
+            "title": "Excluded Recipe Ids"
+          }
+        },
+        "type": "object",
+        "required": [
+          "start_date"
+        ],
+        "title": "MealPlanGenerateRequest"
+      },
+      "MealPlanGenerateResult": {
+        "properties": {
+          "generation_id": {
+            "type": "string",
+            "title": "Generation Id"
+          },
+          "profile_version": {
+            "type": "integer",
+            "title": "Profile Version"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/MealPlanDraft"
+          }
+        },
+        "type": "object",
+        "required": [
+          "generation_id",
+          "profile_version",
+          "plan"
+        ],
+        "title": "MealPlanGenerateResult"
+      },
+      "MealPlanItem": {
+        "properties": {
+          "meal_type": {
+            "type": "string",
+            "title": "Meal Type"
+          },
+          "recipe_id": {
+            "type": "string",
+            "title": "Recipe Id"
+          },
+          "servings": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Servings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "meal_type",
+          "recipe_id",
+          "servings"
+        ],
+        "title": "MealPlanItem"
+      },
+      "Meta": {
+        "properties": {
+          "cached": {
+            "type": "boolean",
+            "title": "Cached",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "Meta"
+      },
+      "NutritionFacts": {
+        "properties": {
+          "calories": {
+            "type": "number",
+            "title": "Calories",
+            "default": 0
+          },
+          "protein_g": {
+            "type": "number",
+            "title": "Protein G",
+            "default": 0
+          },
+          "carbs_g": {
+            "type": "number",
+            "title": "Carbs G",
+            "default": 0
+          },
+          "fat_g": {
+            "type": "number",
+            "title": "Fat G",
+            "default": 0
+          },
+          "fiber_g": {
+            "type": "number",
+            "title": "Fiber G",
+            "default": 0
+          },
+          "sugar_g": {
+            "type": "number",
+            "title": "Sugar G",
+            "default": 0
+          },
+          "sodium_mg": {
+            "type": "number",
+            "title": "Sodium Mg",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "NutritionFacts"
+      },
+      "NutritionInsight": {
+        "properties": {
+          "summary": {
+            "type": "string",
+            "title": "Summary"
+          },
+          "positive_points": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Positive Points"
+          },
+          "suggestions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Suggestions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "summary"
+        ],
+        "title": "NutritionInsight"
+      },
+      "NutritionInsightResult": {
+        "properties": {
+          "generation_id": {
+            "type": "string",
+            "title": "Generation Id"
+          },
+          "nutrition": {
+            "$ref": "#/components/schemas/NutritionFacts"
+          },
+          "insight": {
+            "$ref": "#/components/schemas/NutritionInsight"
+          }
+        },
+        "type": "object",
+        "required": [
+          "generation_id",
+          "nutrition",
+          "insight"
+        ],
+        "title": "NutritionInsightResult"
+      },
+      "ProfileInvalidateRequest": {
+        "properties": {
+          "profile_version": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Version"
+          }
+        },
+        "type": "object",
+        "title": "ProfileInvalidateRequest"
+      },
+      "RecipeRecommendationRequest": {
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "maximum": 50.0,
+            "minimum": 1.0,
+            "title": "Limit",
+            "default": 20
+          },
+          "meal_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meal Type"
+          },
+          "max_cooking_time_minutes": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 600.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Cooking Time Minutes"
+          },
+          "exclude_recipe_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true,
+            "title": "Exclude Recipe Ids"
+          }
+        },
+        "type": "object",
+        "title": "RecipeRecommendationRequest"
+      },
+      "RecommendationEventRequest": {
+        "properties": {
+          "recommendation_id": {
+            "type": "string",
+            "title": "Recommendation Id"
+          },
+          "item_type": {
+            "type": "string",
+            "title": "Item Type"
+          },
+          "item_id": {
+            "type": "string",
+            "title": "Item Id"
+          },
+          "event": {
+            "$ref": "#/components/schemas/RecommendationEventType"
+          }
+        },
+        "type": "object",
+        "required": [
+          "recommendation_id",
+          "item_type",
+          "item_id",
+          "event"
+        ],
+        "title": "RecommendationEventRequest"
+      },
+      "RecommendationEventType": {
+        "type": "string",
+        "enum": [
+          "impression",
+          "clicked",
+          "saved",
+          "ordered",
+          "dismissed"
+        ],
+        "title": "RecommendationEventType"
+      },
+      "RecommendationItem": {
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "title": "Item Id"
+          },
+          "score": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Score"
+          },
+          "compatibility": {
+            "$ref": "#/components/schemas/CompatibilityStatus"
+          },
+          "reasons": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Reasons"
+          }
+        },
+        "type": "object",
+        "required": [
+          "item_id",
+          "score",
+          "compatibility"
+        ],
+        "title": "RecommendationItem"
+      },
+      "RecommendationResult": {
+        "properties": {
+          "recommendation_id": {
+            "type": "string",
+            "title": "Recommendation Id"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/RecommendationItem"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "recommendation_id",
+          "items"
+        ],
+        "title": "RecommendationResult"
+      },
+      "RegenerateSellerRecipeRequest": {
+        "properties": {
+          "previous_generation_id": {
+            "type": "string",
+            "title": "Previous Generation Id"
+          },
+          "instructions": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 3,
+            "title": "Instructions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "previous_generation_id",
+          "instructions"
+        ],
+        "title": "RegenerateSellerRecipeRequest"
+      },
+      "ReplacementOption": {
+        "properties": {
+          "recipe_id": {
+            "type": "string",
+            "title": "Recipe Id"
+          },
+          "compatibility": {
+            "$ref": "#/components/schemas/CompatibilityStatus"
+          },
+          "similarity_score": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Similarity Score"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          }
+        },
+        "type": "object",
+        "required": [
+          "recipe_id",
+          "compatibility",
+          "similarity_score"
+        ],
+        "title": "ReplacementOption"
+      },
+      "ReplacementOptionsRequest": {
+        "properties": {
+          "preference": {
+            "type": "string",
+            "maxLength": 500,
+            "title": "Preference",
+            "default": ""
+          },
+          "limit": {
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "title": "Limit",
+            "default": 3
+          }
+        },
+        "type": "object",
+        "title": "ReplacementOptionsRequest"
+      },
+      "ReplacementOptionsResult": {
+        "properties": {
+          "current_recipe_id": {
+            "type": "string",
+            "title": "Current Recipe Id"
+          },
+          "options": {
+            "items": {
+              "$ref": "#/components/schemas/ReplacementOption"
+            },
+            "type": "array",
+            "title": "Options"
+          }
+        },
+        "type": "object",
+        "required": [
+          "current_recipe_id",
+          "options"
+        ],
+        "title": "ReplacementOptionsResult"
+      },
+      "ResourceType": {
+        "type": "string",
+        "enum": [
+          "food",
+          "recipe"
+        ],
+        "title": "ResourceType"
+      },
+      "SellerRecipeGenerationResult": {
+        "properties": {
+          "generation_id": {
+            "type": "string",
+            "title": "Generation Id"
+          },
+          "recipe": {
+            "$ref": "#/components/schemas/GeneratedRecipeDraft"
+          }
+        },
+        "type": "object",
+        "required": [
+          "generation_id",
+          "recipe"
+        ],
+        "title": "SellerRecipeGenerationResult"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

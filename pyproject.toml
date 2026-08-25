@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "food-ai-backend"
+version = "1.0.0"
+description = "Production-grade FastAPI AI backend for personalized food, meal planning, grocery and seller recipe intelligence"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+  "fastapi>=0.128,<1",
+  "uvicorn[standard]>=0.35,<1",
+  "pydantic>=2.11,<3",
+  "pydantic-settings>=2.9,<3",
+  "httpx>=0.28,<1",
+  "sqlalchemy[asyncio]>=2.0.40,<3",
+  "asyncpg>=0.30,<1",
+  "alembic>=1.15,<2",
+  "redis>=6,<8",
+  "openai>=2,<3",
+  "pgvector>=0.4,<1",
+]
+
+[project.optional-dependencies]
+test = [
+  "pytest>=8.3,<10",
+  "pytest-asyncio>=1.0,<2",
+  "pytest-cov>=6,<8",
+  "ruff>=0.12,<1",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = ["integration: tests requiring Docker infrastructure", "live: paid tests requiring the real OpenAI API"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
