@@ -2,6 +2,7 @@ from __future__ import annotations
 from datetime import date
 from uuid import UUID
 from pydantic import BaseModel, Field, ConfigDict
+from app.core.ids import UserId
 
 
 class NutritionFacts(BaseModel):
@@ -32,7 +33,7 @@ class IngredientAmount(BaseModel):
 
 
 class UserAIProfile(BaseModel):
-    user_id: UUID
+    user_id: UserId
     profile_version: int = 1
     dietary_preferences: set[str] = Field(default_factory=set)
     allergies: set[str] = Field(default_factory=set)
@@ -94,7 +95,7 @@ class MealPlanDraft(BaseModel):
 
 class StoredMealPlan(BaseModel):
     plan_id: str
-    user_id: UUID
+    user_id: UserId
     version: int = 1
     days: list[MealPlanDay]
 
@@ -124,7 +125,7 @@ class GeneratedRecipeDraft(BaseModel):
 
 class SellerFoodDraft(BaseModel):
     food_id: str
-    seller_user_id: UUID
+    seller_user_id: UserId
     seller_id: str
     name: str
     cuisine: str | None = None

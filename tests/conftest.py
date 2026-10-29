@@ -17,11 +17,11 @@ def main_backend():
 
 @pytest.fixture
 def container(main_backend):
-    settings=Settings(internal_service_token='test-service-token-123',llm_provider='fake')
+    settings=Settings(llm_provider='fake')
     return AppContainer(settings,MemoryCache(),main_backend,FakeLLMProvider(),InMemoryGenerationRepository(),InMemoryRecommendationEventRepository(),InMemoryHealthRepository())
 
 @pytest.fixture
 def app(container): return create_app(container=container,settings=container.settings)
 
 @pytest.fixture
-def headers(): return {'Authorization':'Bearer test-service-token-123','X-User-ID':str(USER_ID),'X-Request-ID':'req-test'}
+def headers(): return {'X-User-ID':str(USER_ID),'X-Request-ID':'req-test'}

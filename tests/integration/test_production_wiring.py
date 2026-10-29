@@ -15,16 +15,14 @@ async def test_production_container_with_docker_services_and_http_main_backend()
         pytest.skip('Run through docker-compose.test.yml')
     settings=Settings(
         app_env='test',
-        internal_service_token='test-service-token-123',
         database_url=os.environ['DATABASE_URL'],
         redis_url=os.environ['REDIS_URL'],
         main_backend_base_url=os.environ['MAIN_BACKEND_BASE_URL'],
-        main_backend_service_token='mock-token',
         llm_provider='fake',
     )
     container=build_production_container(settings)
     app=create_app(container=container,settings=settings)
-    headers={'Authorization':'Bearer test-service-token-123','X-User-ID':str(USER_ID),'Idempotency-Key':'docker-plan-1'}
+    headers={'X-User-ID':str(USER_ID),'Idempotency-Key':'docker-plan-1'}
     try:
         async with AsyncClient(transport=ASGITransport(app=app),base_url='http://test') as client:
             rec=await client.post('/internal/v1/recommendations/foods',headers=headers,json={'limit':5,'meal_type':'lunch'})

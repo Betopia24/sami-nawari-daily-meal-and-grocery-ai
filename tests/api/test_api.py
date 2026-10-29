@@ -8,13 +8,6 @@ async def test_health_live(app):
         r=await client.get('/health/live'); assert r.status_code==200
 
 @pytest.mark.asyncio
-async def test_service_auth_required(app,headers):
-    async with AsyncClient(transport=ASGITransport(app=app),base_url='http://test') as client:
-        bad={**headers,'Authorization':'Bearer wrong'}
-        r=await client.post('/internal/v1/recommendations/foods',headers=bad,json={'limit':5})
-        assert r.status_code==401
-
-@pytest.mark.asyncio
 async def test_food_recommendation_endpoint(app,headers):
     async with AsyncClient(transport=ASGITransport(app=app),base_url='http://test') as client:
         r=await client.post('/internal/v1/recommendations/foods',headers=headers,json={'limit':5,'meal_type':'lunch'})

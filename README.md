@@ -54,7 +54,7 @@ The production HTTP adapter expects private main-backend routes:
 - `GET /internal/ai/meal-plans/{plan_id}`
 - `GET /internal/ai/seller-foods/{food_id}/draft`
 
-All should be protected with the main-backend service token.
+All should be reachable only through the private main-backend integration.
 
 ## AI API endpoints
 
@@ -73,10 +73,9 @@ All should be protected with the main-backend service token.
 - `POST /internal/v1/recommendation-events`
 - `POST /internal/v1/users/{user_id}/profile-cache/invalidate`
 
-Required internal headers for personalized routes:
+Required internal header for personalized routes:
 
 ```http
-Authorization: Bearer <INTERNAL_SERVICE_TOKEN>
 X-User-ID: <authenticated UUID from main backend>
 X-Request-ID: <optional tracing ID>
 ```

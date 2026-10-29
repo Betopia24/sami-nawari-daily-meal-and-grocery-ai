@@ -1,5 +1,4 @@
 from functools import lru_cache
-from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -14,8 +13,6 @@ class Settings(BaseSettings):
     log_level: str = 'INFO'
     debug: bool = False
 
-    internal_service_token: str = Field(default='change-me-in-production', min_length=12)
-
     database_url: str = 'postgresql+asyncpg://food_ai:food_ai@postgres:5432/food_ai'
     redis_url: str = 'redis://redis:6379/0'
     redis_profile_ttl_seconds: int = 900
@@ -23,7 +20,6 @@ class Settings(BaseSettings):
     idempotency_ttl_seconds: int = 3600
 
     main_backend_base_url: str = 'http://host.docker.internal:8001'
-    main_backend_service_token: str = 'change-me-main-backend-token'
     main_backend_timeout_seconds: float = 5.0
 
     llm_provider: str = 'openai'

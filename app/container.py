@@ -55,7 +55,7 @@ class AppContainer:
 
 def build_production_container(settings: Settings) -> AppContainer:
     cache=RedisCache(settings.redis_url)
-    main_backend=HttpMainBackendClient(settings.main_backend_base_url,settings.main_backend_service_token,settings.main_backend_timeout_seconds)
+    main_backend=HttpMainBackendClient(settings.main_backend_base_url,settings.main_backend_timeout_seconds)
     if settings.llm_provider=='fake':
         llm=FakeLLMProvider()
     else:

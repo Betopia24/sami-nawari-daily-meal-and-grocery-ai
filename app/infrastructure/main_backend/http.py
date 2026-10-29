@@ -5,11 +5,10 @@ from app.domain.models import UserAIProfile, FoodItem, Recipe, StoredMealPlan, S
 
 
 class HttpMainBackendClient:
-    def __init__(self, base_url: str, service_token: str, timeout_seconds: float = 5.0) -> None:
+    def __init__(self, base_url: str, timeout_seconds: float = 5.0) -> None:
         self._client = httpx.AsyncClient(
             base_url=base_url.rstrip('/'),
             timeout=timeout_seconds,
-            headers={'Authorization': f'Bearer {service_token}'},
         )
 
     async def _get(self, path: str, *, params: dict | None = None):
